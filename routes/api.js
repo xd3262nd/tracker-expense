@@ -7,7 +7,7 @@ let Expense = db.Expense
 let router = express.Router()
 
 router.get('/expenses', function(req,res,next){
-    Expense.findAll().then( expenses => {
+    Expense.findAll( { order: ['date'] }).then( expenses => {
         return res.json(expenses)
     })
 })

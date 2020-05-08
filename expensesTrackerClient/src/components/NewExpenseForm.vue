@@ -33,7 +33,7 @@
                 <div class="col-sm-10">
                     <select class="form-control" v-model="category">
                         <option disabled value="">Please select one</option>
-                        <option v-for="category in categories" v-bind:value="category" >{{category}}</option> 
+                        <option v-for="category in categories" v-bind:key="category" v-bind:value="category" >{{category}}</option> 
                     </select>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col-sm-10">
                     <select class="form-control" v-model="method">
                         <option disabled value="">Please select one</option>
-                        <option v-for="method in methods" v-bind:value="method" >{{method}}</option> 
+                        <option v-for="method in methods" v-bind:key="method" v-bind:value="method" >{{method}}</option> 
                     </select>
                 </div>
             </div>

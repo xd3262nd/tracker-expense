@@ -1,22 +1,23 @@
 <template>
   <div id="app">
     <Header></Header>
+    <RouterView></RouterView>
 
-    <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
-    <ExpenseTable v-bind:expenses="expenses"></ExpenseTable>
+    <!-- <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
+    <ExpenseTable v-bind:expenses="expenses"></ExpenseTable> -->
     
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-import NewExpenseForm from '@/components/NewExpenseForm.vue'
-import ExpenseTable from './components/ExpenseTable.vue'
+// import NewExpenseForm from '@/components/NewExpenseForm.vue'
+// import ExpenseTable from './components/ExpenseTable.vue'
 
 export default {
   name: 'App',
   components: {
-    Header, NewExpenseForm, ExpenseTable
+    Header
   },
   data() {
     return{
@@ -26,19 +27,19 @@ export default {
 
   },
   methods: {
-    newExpenseAdded(expense) {
-      this.$ExpenseService.addExpense(expense).then( expense => {
-        this.updateExpense()
-      }).catch( err => {
-        let msg = err.response.data.join(', ')
-        alert('Error adding new expense.\n' + msg)
-      })
-    },
-    updateExpense() {
-      this.$ExpenseService.getAllExpenses().then( expenses => {
-        this.expenses = expenses
-      })
-    }
+    // newExpenseAdded(expense) {
+    //   this.$ExpenseService.addExpense(expense).then( expense => {
+    //     this.updateExpense()
+    //   }).catch( err => {
+    //     let msg = err.response.data.join(', ')
+    //     alert('Error adding new expense.\n' + msg)
+    //   })
+    // },
+    // updateExpense() {
+    //   this.$ExpenseService.getAllExpenses().then( expenses => {
+    //     this.expenses = expenses
+    //   })
+    // }
   }
 }
 </script>

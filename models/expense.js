@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
     })
 
-    Expense.sync({force: true}).then( () => {
+    Expense.sync({force: false}).then( () => {
         console.log('synced expense table')
     })
 

@@ -4,7 +4,7 @@
         <td>{{expense.date}}</td>
         <td>{{expense.category}}</td>
         <td>{{expense.method}}</td>
-        <td>{{expense.value}}</td>
+        <td>${{expense.value | decimalPlaces(2)}}</td>
         
     </tr>
 </template>
@@ -18,6 +18,11 @@ export default {
     },
     methods: {
         
+    },
+    filters: {
+        decimalPlaces: function(value, decimalPlaces){
+            return value.toFixed(decimalPlaces)
+        }
     }
 }
 </script>
