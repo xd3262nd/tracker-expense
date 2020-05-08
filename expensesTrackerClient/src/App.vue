@@ -2,6 +2,7 @@
   <div id="app">
     <Header></Header>
     <RouterView></RouterView>
+    <Footer></Footer>
 
     <!-- <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
     <ExpenseTable v-bind:expenses="expenses"></ExpenseTable> -->
@@ -11,13 +12,14 @@
 
 <script>
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 // import NewExpenseForm from '@/components/NewExpenseForm.vue'
 // import ExpenseTable from './components/ExpenseTable.vue'
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header, Footer
   },
   data() {
     return{
