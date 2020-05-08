@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NewExpenseForm from '@/components/NewExpenseForm.vue'
+import NewExpenseForm from './components/NewExpenseForm.vue'
 import ExpenseTable from './components/ExpenseTable.vue'
 
 export default {
