@@ -69,7 +69,7 @@
             </div>
 
             <!-- ! This is the button section -->
-            <button class="btn btn-primary" v-on:click.prevent="addExpense">Add</button>
+            <button class="btn btn-primary" v-on:click="addExpense">Add</button>
 
         </div>
     </div>

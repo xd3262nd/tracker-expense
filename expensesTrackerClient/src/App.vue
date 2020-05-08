@@ -3,19 +3,20 @@
     <Header></Header>
 
     <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
-
-    {{expenses}}
+    <ExpenseTable v-bind:expenses="expenses"></ExpenseTable>
+    
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import NewExpenseForm from '@/components/NewExpenseForm.vue'
+import ExpenseTable from './components/ExpenseTable.vue'
 
 export default {
   name: 'App',
   components: {
-    Header, NewExpenseForm
+    Header, NewExpenseForm, ExpenseTable
   },
   data() {
     return{
@@ -33,7 +34,7 @@ export default {
         alert('Error adding new expense.\n' + msg)
       })
     },
-    updateExpnse() {
+    updateExpense() {
       this.$ExpenseService.getAllExpenses().then( expenses => {
         this.expenses = expenses
       })
