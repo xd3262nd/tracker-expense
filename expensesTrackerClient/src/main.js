@@ -1,9 +1,10 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+
 import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
 
 // Import VueRouter library, and this app's routes
-import VueRouter from 'vue-router'
 import router from './router'
 
 

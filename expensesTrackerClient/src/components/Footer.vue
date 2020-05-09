@@ -1,9 +1,36 @@
 <template>
 
     <div class="footer">
-        <span class="p-2">
-        <router-link to="/">Main Page</router-link>
-        </span>
+        
+
+        <!-- Footer -->
+        <footer class="page-footer font-small special-color-dark pt-4 ">
+
+        <!-- Footer Elements -->
+        <div class="container">
+            <div class="font-up-bold text-uppercase">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb indigo lighten-4">
+                        <li class="breadcrumb-item"><router-link to="/"><strong>Main Page</strong></router-link></li>
+                        <li class="breadcrumb-item"><router-link to="/Snapshot"><strong>Snapshot</strong></router-link></li>
+                    </ol>
+
+                </nav>
+
+            </div>
+
+            
+
+        </div>
+        <!-- Footer Elements -->
+
+        
+
+        </footer>
+        <!-- Footer -->
+
+
+
     </div>
 
     
@@ -22,5 +49,25 @@ export default {
 </script>
 
 <style scoped>
+
+
+.footer{
+    text-align: center;
+    position:center;
+
+}
+
+.breadcrumb{
+    background-color:lightgray;
+    text-align: center;
+}
+li{
+    text-align: center;
+    display: inline;
+    padding-left:420px;
+
+}
+
+
 
 </style>

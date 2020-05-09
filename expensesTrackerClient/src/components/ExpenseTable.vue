@@ -3,7 +3,7 @@
 
     <div>
         <div class="card expense-list m-2 p-2">
-            <h4 class="card-title">Expense History</h4>
+            <h2 class="card-title">Expense History</h2>
 
             <div class="edit-table-toggle form-check">
             
@@ -19,6 +19,7 @@
                         <th>Category</th>
                         <th>Method</th>
                         <th>Amount</th>
+                        <!-- <th v-show="editTable">Delete</th> -->
                     </tr>
 
                     <ExpenseRow v-for="expense in expenses" v-bind:key="expense.name" v-bind:expense="expense" ></ExpenseRow>
@@ -37,7 +38,9 @@ import ExpenseRow from '@/components/ExpenseRow.vue'
 
 export default {
     name: 'ExpenseTable',
-    components: {ExpenseRow},
+    components: {
+        ExpenseRow
+    },
     data() {
         return{
 

@@ -2,10 +2,13 @@
   <div id="app">
     <Header></Header>
     <RouterView></RouterView>
+
+    <Search></Search>
+
+
     <Footer></Footer>
 
-    <!-- <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
-    <ExpenseTable v-bind:expenses="expenses"></ExpenseTable> -->
+   
     
   </div>
 </template>
@@ -13,13 +16,13 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-// import NewExpenseForm from '@/components/NewExpenseForm.vue'
-// import ExpenseTable from './components/ExpenseTable.vue'
+import Search from './components/ExpenseSearch.vue'
+
 
 export default {
   name: 'App',
   components: {
-    Header, Footer
+    Header, Footer, Search
   },
   data() {
     return{
@@ -29,19 +32,7 @@ export default {
 
   },
   methods: {
-    // newExpenseAdded(expense) {
-    //   this.$ExpenseService.addExpense(expense).then( expense => {
-    //     this.updateExpense()
-    //   }).catch( err => {
-    //     let msg = err.response.data.join(', ')
-    //     alert('Error adding new expense.\n' + msg)
-    //   })
-    // },
-    // updateExpense() {
-    //   this.$ExpenseService.getAllExpenses().then( expenses => {
-    //     this.expenses = expenses
-    //   })
-    // }
+   
   }
 }
 </script>

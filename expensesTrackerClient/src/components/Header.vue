@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-4" id="title">Expenses Tracker</h1>
-            <p class="lead text-center font-weight-bold text-muted">Use this app to track your daily expenses.</p>
+            <p class="lead font-weight-bold text-muted">Use this app to track your daily expenses.</p>
         </div>
     </div>
     
@@ -35,11 +35,12 @@ export default {
 font-weight: 500;
 color: rgb(173, 155, 155);
 }
-div.container{
+
+div.container, h1, p{
     margin: 20px;
     opacity: 10.2;
+    text-align: left;
+    font-weight: bolder;
 }
-
-
 
 </style>

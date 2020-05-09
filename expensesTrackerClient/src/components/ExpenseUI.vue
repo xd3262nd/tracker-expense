@@ -1,16 +1,16 @@
 <template>
 
     <div>
-
         <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
         <ExpenseTable v-bind:expenses="expenses"></ExpenseTable>
 
-    <div>
+
+    </div>
 </template>
 
 <script>
-import NewExpenseForm from './components/NewExpenseForm.vue'
-import ExpenseTable from './components/ExpenseTable.vue'
+import NewExpenseForm from './NewExpenseForm.vue'
+import ExpenseTable from './ExpenseTable.vue'
 
 export default {
     name: 'ExpenseUI',
@@ -23,6 +23,9 @@ export default {
       message: ''
     }
 
+  },
+  mounted(){
+      this.updateExpense()
   },
   methods: {
     newExpenseAdded(expense) {
@@ -38,7 +41,8 @@ export default {
         this.expenses = expenses
       })
     }
-  }
+  
 
-}
+    }
+  }
 </script>
