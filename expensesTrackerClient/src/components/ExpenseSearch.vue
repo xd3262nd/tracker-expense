@@ -39,6 +39,7 @@
 
 
     <PieChart  v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
+
 </div>
 
 
@@ -69,18 +70,18 @@ export default {
             allData: [],
             monthData: [],
             monthObject:{
-                'Jan' : '01',
-                'Feb' : '02',
-                'Mar' : '03',
-                'Apr' : '04',
+                'January' : '01',
+                'February' : '02',
+                'March' : '03',
+                'April' : '04',
                 'May' : '05',
-                'Jun' : '06',
-                'Jul' : '07',
-                'Aug' : '08',
-                'Sep' : '09',
-                'Oct' : '10',
-                'Nov' : '11',
-                'Dec' : '12'
+                'June' : '06',
+                'July' : '07',
+                'August' : '08',
+                'September' : '09',
+                'October' : '10',
+                'November' : '11',
+                'December' : '12'
             },
             
         }
@@ -98,11 +99,13 @@ export default {
         getDate() {
             // TODO Need to figure out how to refresh the year options when new expenses added
             this.$ExpenseService.getAllExpenses().then( expenses => {
+                this.expenses = expenses
+
                 let yearList = [];
                 let allDates = [];
 
-
                 expenses.forEach(function(element, index){
+
                     let tmp = element.date
                     let dateList = element.date.split('-')
                     if (!yearList.includes(dateList[0])){
@@ -115,21 +118,28 @@ export default {
 
                 })
                 this.years = yearList
-                console.log(this.years)
-                console.log(allDates)
                 this.dateData = allDates
             })
         },
         getMonth(monthList){
             console.log(monthList)
-            let tmpMonthObject = this.monthObject
-            tmpMonthObject.forEach( function (el) {
-                if (monthList.includes(tmpMonthObject[el])) {
-                    console.log(tmpMonthObject[el])
+
+            for( let i in this.monthObject){
+                if (monthList.includes(this.monthObject[i])){
+                    this.months.push(i)
+                }
+            }
+        },
+        getExpenses(year, month) {
+            this.expenses.forEach( function (el, index){
+                if(el.date.split('-')[0] ==  year && el.date.split('-')[1] == month){
+                    console.log(el)
+
                 }
             })
-
+        
         }
+
     
     },
     watch: {
@@ -152,8 +162,20 @@ export default {
             this.getMonth(tmpList)
 
                 
+        },
+        month: function(month, year){
+            // TODO make API call? and get data to transfer to the piechart component [need to set true for dataloaded] ?
+            console.log(this.month, this.year)
+
+            let selectedMonth = this.monthObject[this.month]
+            console.log(selectedMonth) //print the number of month
+
+            // pass the search requirments to the function that get all expneses and filter it
+            this.getExpenses(this.year, selectedMonth)
+
         }
     }
+
     
 }
 </script>
