@@ -4,7 +4,7 @@
         
 
         <!-- Footer -->
-        <footer class="page-footer font-small special-color-dark pt-4 ">
+        <footer class="page-footer">
 
         <!-- Footer Elements -->
         <div class="container">
@@ -67,6 +67,7 @@ li{
     padding-left:420px;
 
 }
+
 
 
 

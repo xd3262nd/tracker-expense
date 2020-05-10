@@ -5,10 +5,12 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1>Monthly Snapshot</h1>
-                <p>Description: TODO HERE</p>
+                <p>An Overview of Your Monthly Expenses in a PieChart</p>
                 
             </div>
+        </div>
 
+        <div class="searchForm">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="year">Year: </label>
 
@@ -57,7 +59,6 @@ export default {
     },
     data() {
         return{
-            expensesData: [],
             expensesChartData: {},
             options: {},
             dataLoaded: false,
@@ -129,13 +130,41 @@ export default {
             }
         },
         getExpenses(year, month) {
+            // Store key and value of categories and amount spent for that categories
+            let tmpData = {};
+
             this.expenses.forEach( function (el, index){
                 if(el.date.split('-')[0] ==  year && el.date.split('-')[1] == month){
-                    console.log(el)
                     // TODO need to calculate the percentage [(one categories expenses)/ total expenses on that month] * 100
-
+                    if (!tmpData.hasOwnProperty(el.category)){
+                        tmpData[el.category] = el.value
+                        console.log(tmpData)
+                    }else{
+                        let tmpValue = tmpData[el.category]
+                        tmpData[el.category] = tmpValue + el.value
+                        console.log(tmpData)
+                    }
                 }
             })
+
+            // Calculation and put them into the chartData
+            let total = 0;
+            for (let i in tmpData){
+                    total = parseFloat(total) + parseFloat(tmpData[i])
+            }
+
+            // Iterate each key value pairs
+            for ( let el in tmpData ){
+                    // Calculation 
+                    let proportion = ((parseFloat(tmpData[el])/parseFloat(total)) * 100).toFixed(2)
+                    console.log(proportion)
+                    this.expensesChartData[el] = proportion
+            }
+            
+            console.log(this.expensesChartData)
+            this.dataLoaded = true
+
+
         
         }
 
@@ -180,5 +209,12 @@ export default {
 </script>
 
 <style scoped>
+.searchForm {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.jumbotron{
+    background-color:blanchedalmond;
+}
 
 </style>
