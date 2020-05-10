@@ -122,8 +122,6 @@ export default {
             })
         },
         getMonth(monthList){
-            console.log(monthList)
-
             for( let i in this.monthObject){
                 if (monthList.includes(this.monthObject[i])){
                     this.months.push(i)
@@ -134,6 +132,7 @@ export default {
             this.expenses.forEach( function (el, index){
                 if(el.date.split('-')[0] ==  year && el.date.split('-')[1] == month){
                     console.log(el)
+                    // TODO need to calculate the percentage [(one categories expenses)/ total expenses on that month] * 100
 
                 }
             })

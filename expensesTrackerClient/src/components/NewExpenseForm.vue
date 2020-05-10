@@ -116,6 +116,7 @@ export default {
         },
         addExpense(){
             this.errors = []
+            // TODO: Need to validate if the amount is numeric etc...
             if(this.newTransactionName && this.category && this.value && this.method && this.when){
                 let expense = {
                     name: this.newTransactionName,
