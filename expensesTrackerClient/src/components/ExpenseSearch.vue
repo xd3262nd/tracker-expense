@@ -23,8 +23,8 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="category">Month: </label>
 
-                <div class="col-sm-10" v-model="month">
-                    <select class="form-control" >
+                <div class="col-sm-10" >
+                    <select class="form-control" v-model="month" >
                         <option disabled value="">Please select one</option>
                         <option v-for="month in months" v-bind:key="month" v-bind:value="month" >{{month}}</option> 
                     </select>
@@ -67,6 +67,21 @@ export default {
             month: '',
             dateData: [],
             allData: [],
+            monthData: [],
+            monthObject:{
+                'Jan' : '01',
+                'Feb' : '02',
+                'Mar' : '03',
+                'Apr' : '04',
+                'May' : '05',
+                'Jun' : '06',
+                'Jul' : '07',
+                'Aug' : '08',
+                'Sep' : '09',
+                'Oct' : '10',
+                'Nov' : '11',
+                'Dec' : '12'
+            },
             
         }
     },
@@ -81,14 +96,14 @@ export default {
     },
     methods: {
         getDate() {
-
+            // TODO Need to figure out how to refresh the year options when new expenses added
             this.$ExpenseService.getAllExpenses().then( expenses => {
                 let yearList = [];
-                let dateList = [];
+                let allDates = [];
 
-                expenses.forEach(function(element, index){  
+
+                expenses.forEach(function(element, index){
                     let tmp = element.date
-                    console.log(String(tmp))
                     let dateList = element.date.split('-')
                     if (!yearList.includes(dateList[0])){
                         yearList.push(dateList[0])
@@ -96,20 +111,48 @@ export default {
                             return s1 > s2 ? 1 : -1
                         })
                     }
-                    dateList.push('hi')
+                    allDates.push(element.date)
 
                 })
                 this.years = yearList
-                console.log(dateList)
+                console.log(this.years)
+                console.log(allDates)
+                this.dateData = allDates
+            })
+        },
+        getMonth(monthList){
+            console.log(monthList)
+            let tmpMonthObject = this.monthObject
+            tmpMonthObject.forEach( function (el) {
+                if (monthList.includes(tmpMonthObject[el])) {
+                    console.log(tmpMonthObject[el])
+                }
             })
 
+        }
+    
+    },
+    watch: {
+        year: function(year){
+            let tmpList = []      
 
-        },
-        
+            this.dateData.forEach(function (el, index){          
+                if (el.split('-')[0] == year){
+                    let tmpMonth = el.split('-')[1]
+                    if (!tmpList.includes(tmpMonth)){
+                        tmpList.push(tmpMonth)
+                        tmpList.sort (function (s1, s2){
+                            return s1 > s2 ? 1 : -1
+                        })
+                    }
+                    
+                }
+            })
+            
+            this.getMonth(tmpList)
 
-
-
-
+                
+        }
     }
     
 }
