@@ -90,6 +90,7 @@ export default {
     mounted(){
         this.options = {
             hoverBorderWidth: 20,
+            
         }
         this.getDate()
 
@@ -206,7 +207,8 @@ export default {
     },
     watch: {
         year: function(year){
-            let tmpList = []      
+            let tmpList = []
+            this.months = []      
 
             this.dateData.forEach(function (el, index){          
                 if (el.split('-')[0] == year){
@@ -226,7 +228,6 @@ export default {
                 
         },
         month: function(month, year){
-            // TODO make API call? and get data to transfer to the piechart component [need to set true for dataloaded] ?
             console.log(this.month, this.year)
 
             let selectedMonth = this.monthObject[this.month]

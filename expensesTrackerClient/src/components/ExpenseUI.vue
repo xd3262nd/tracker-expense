@@ -41,9 +41,11 @@ export default {
         this.expenses = expenses
       })
     },
-    // deleteExpense(){
-    //     this.$ExpenseService.
-    // }
+    deleteExpense(expense){
+        this.$ExpenseService.deleteExpense(expense.id).then( () => {
+            this.updateExpense()
+        })
+    }
   
 
     }

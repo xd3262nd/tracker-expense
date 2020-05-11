@@ -26,6 +26,12 @@ router.get('/methods', function(req,res,next){
     return res.json(['Debit Card', 'Credit Card', 'Cash'])
 })
 
+router.delete('/expenses/:id', function(req,res,next){
+    Expense.destroy({where: {id: req.params.id}}).then( rowsModified => {
+        return res.send('ok')
+    }).catch( err => next(err))
+})
+
 
 
 module.exports = router

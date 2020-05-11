@@ -25,6 +25,8 @@ export default {
        })
    },
    deleteExpense(id) {
-       return axios.delete('/api/')
+       return axios.delete('/api/expenses/' + id).then( response => {
+           return response.data
+       })
    }
 }

@@ -44,7 +44,7 @@ export default {
     },
     data() {
         return{
-            editTable: false
+            editTable: false,
         }
     },
     props:{
