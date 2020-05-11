@@ -23,5 +23,8 @@ export default {
        return axios.get('/api/methods').then( response => {
            return response.data
        })
+   },
+   deleteExpense(id) {
+       return axios.delete('/api/')
    }
 }

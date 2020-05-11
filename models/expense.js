@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     let Expense = sequelize.define('Expense', {
+    //    TODO: how to set the id as unique value to search from?
 
         name: {
             type: DataTypes.STRING,

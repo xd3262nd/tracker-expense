@@ -2,7 +2,7 @@
 
     <div>
         <NewExpenseForm v-on:new-expense="newExpenseAdded"></NewExpenseForm>
-        <ExpenseTable v-bind:expenses="expenses"></ExpenseTable>
+        <ExpenseTable v-bind:expenses="expenses" v-on:delete-expense="deleteExpense"></ExpenseTable>
 
 
     </div>
@@ -40,7 +40,10 @@ export default {
       this.$ExpenseService.getAllExpenses().then( expenses => {
         this.expenses = expenses
       })
-    }
+    },
+    // deleteExpense(){
+    //     this.$ExpenseService.
+    // }
   
 
     }

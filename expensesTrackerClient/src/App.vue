@@ -3,9 +3,6 @@
     <Header></Header>
     <RouterView></RouterView>
 
-    <Search></Search>
-
-
     <Footer></Footer>
 
    

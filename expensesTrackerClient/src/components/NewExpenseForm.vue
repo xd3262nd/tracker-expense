@@ -118,23 +118,32 @@ export default {
             this.errors = []
             // TODO: Need to validate if the amount is numeric etc...
             if(this.newTransactionName && this.category && this.value && this.method && this.when){
-                let expense = {
-                    name: this.newTransactionName,
-                    category: this.category,
-                    value: this.value,
-                    method: this.method,
-                    date: this.when
+                if(!this.isNumeric(this.value)){
+                    this.errors.push("Enter numeric values for the expense's amount.")
+                }else{
+                    let expense = {
+                        name: this.newTransactionName,
+                        category: this.category,
+                        value: this.value,
+                        method: this.method,
+                        date: this.when
+                    }
+                    // emit message to parent with info about new expense.
+                    this.$emit('new-expense', expense);
+                    this.newTransactionName = ''
+                    this.category = ''
+                    this.when = ''
+                    this.value = ''
+                    this.method = ' '
                 }
-                // emit message to parent with info about new expense.
-                this.$emit('new-expense', expense);
-                this.newTransactionName = ''
-                this.category = ''
-                this.when = ''
-                this.value = ''
-                this.method = ' '
+
+                
             }
 
-        }
+        },
+        isNumeric: function (n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        },
 
     },
     computed: {

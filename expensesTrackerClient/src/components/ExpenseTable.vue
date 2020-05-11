@@ -8,7 +8,8 @@
             <div class="edit-table-toggle form-check">
             
                 
-
+            <input id="edit-table" type="checkbox" class="form-check-input" v-model="editTable">
+            <label for="edit-table" class="form-check-label">Edit Table?</label>
             </div>
 
             <div id="expense-table">
@@ -19,10 +20,10 @@
                         <th>Category</th>
                         <th>Method</th>
                         <th>Amount</th>
-                        <!-- <th v-show="editTable">Delete</th> -->
+                        <th v-show="editTable">Delete</th>
                     </tr>
 
-                    <ExpenseRow v-for="expense in expenses" v-bind:key="expense.name" v-bind:expense="expense" ></ExpenseRow>
+                    <ExpenseRow v-for="expense in expenses" v-bind:key="expense.name" v-bind:expense="expense" v-bind:edit="editTable" v-on:delete-expense="deleteExpense" ></ExpenseRow>
                     
 
                 </table>
@@ -43,14 +44,16 @@ export default {
     },
     data() {
         return{
-
+            editTable: false
         }
     },
     props:{
         expenses: Array
     },
     methods: {
-
+        deleteExpense(expense) {
+            this.$emit('delete-expense', expense)
+        }
     }
 
 }

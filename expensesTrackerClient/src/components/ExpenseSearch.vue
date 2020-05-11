@@ -2,10 +2,10 @@
 
 <div>
     <body>
-        <div class="jumbotron jumbotron-fluid">
+        <div class="card-body">
             <div class="container">
-                <h1>Monthly Snapshot</h1>
-                <p>An Overview of Your Monthly Expenses in a PieChart</p>
+                <h1 class="card-title">Monthly Snapshot</h1>
+                <p class="card-text text-muted">An Overview of Your Monthly Expenses in a PieChart</p>
                 
             </div>
         </div>
@@ -53,7 +53,7 @@
 import PieChart from "./ExpenseGraph.vue"
 
 export default {
-    name: 'Search',
+    name: "Search",
     components:{
         PieChart
     },
@@ -91,7 +91,6 @@ export default {
         this.options = {
             hoverBorderWidth: 20,
         }
-        // this.loadExpenseData(),
         this.getDate()
 
 
@@ -99,6 +98,7 @@ export default {
     methods: {
         getDate() {
             // TODO Need to figure out how to refresh the year options when new expenses added
+            // TODO Need to fix issues when user re-select another year / month on the search form
             this.$ExpenseService.getAllExpenses().then( expenses => {
                 this.expenses = expenses
 
@@ -129,13 +129,30 @@ export default {
                 }
             }
         },
+        generateRandomColor(dataLength){
+            let colorsArray = []
+            while (colorsArray.length <= dataLength){
+                // Generate random red, blue, green
+                let red = Math.floor(Math.random() * 255)
+                let blue = Math.floor(Math.random() * 255)
+                let green = Math.floor(Math.random() * 255)
+                // Create a color using rgb(r, g, b) format
+                let randomColor = `rgb(${red}, ${green}, ${blue})`
+                colorsArray.push(randomColor)
+            }
+            return colorsArray
+
+
+        },
         getExpenses(year, month) {
             // Store key and value of categories and amount spent for that categories
             let tmpData = {};
+            let total = 0;
+            let chartObj = {};
+
 
             this.expenses.forEach( function (el, index){
                 if(el.date.split('-')[0] ==  year && el.date.split('-')[1] == month){
-                    // TODO need to calculate the percentage [(one categories expenses)/ total expenses on that month] * 100
                     if (!tmpData.hasOwnProperty(el.category)){
                         tmpData[el.category] = el.value
                         console.log(tmpData)
@@ -148,7 +165,6 @@ export default {
             })
 
             // Calculation and put them into the chartData
-            let total = 0;
             for (let i in tmpData){
                     total = parseFloat(total) + parseFloat(tmpData[i])
             }
@@ -158,9 +174,27 @@ export default {
                     // Calculation 
                     let proportion = ((parseFloat(tmpData[el])/parseFloat(total)) * 100).toFixed(2)
                     console.log(proportion)
-                    this.expensesChartData[el] = proportion
+                    chartObj[el] = proportion
+            }
+            let colors = this.generateRandomColor(Object.keys(chartObj).length)
+
+            this.expensesChartData = {
+                hoverBackgroundColor: "red",
+                hoverBorderWidth: 10,
+                labels: Object.keys(chartObj),
+                datasets: [
+                    {
+                     label: "Data",
+                     backgroundColor: colors,
+                     data: Object.values(chartObj) //TODO: need to display in a percentage instead of plain number
+
+                    }
+                ]
             }
             
+
+
+
             console.log(this.expensesChartData)
             this.dataLoaded = true
 
@@ -213,8 +247,8 @@ export default {
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.jumbotron{
-    background-color:blanchedalmond;
+.container{
+    text-align: center;
 }
 
 </style>
