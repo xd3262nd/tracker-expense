@@ -1,7 +1,10 @@
 <template>
 
     <div>
-        <!--TODO Error message here -->
+        <!-- Error message here -->
+        <div class="alert alert-danger" v-show="errors.length > 0 ">
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </div>
 
         <div class="card m-2 p-2">
             <h2 class="card-title">Add New Expenses</h2>
@@ -119,6 +122,7 @@ export default {
             // TODO: Need to validate if the amount is numeric etc...
             if(this.newTransactionName && this.category && this.value && this.method && this.when){
                 if(!this.isNumeric(this.value)){
+                    console.log('not numeric')
                     this.errors.push("Enter numeric values for the expense's amount.")
                 }else{
                     let expense = {

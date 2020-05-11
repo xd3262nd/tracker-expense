@@ -90,6 +90,18 @@ export default {
     mounted(){
         this.options = {
             hoverBorderWidth: 20,
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
+                    }
+                }
+            },
+            responsive: true,
+            legend: {
+                position:'bottom'
+            }
+
             
         }
         this.getDate()
@@ -99,7 +111,6 @@ export default {
     methods: {
         getDate() {
             // TODO Need to figure out how to refresh the year options when new expenses added
-            // TODO Need to fix issues when user re-select another year / month on the search form
             this.$ExpenseService.getAllExpenses().then( expenses => {
                 this.expenses = expenses
 
@@ -185,7 +196,7 @@ export default {
                 labels: Object.keys(chartObj),
                 datasets: [
                     {
-                     label: "Data",
+                     label: "Expenses",
                      backgroundColor: colors,
                      data: Object.values(chartObj) //TODO: need to display in a percentage instead of plain number
 

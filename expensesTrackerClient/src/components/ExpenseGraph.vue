@@ -8,9 +8,10 @@ export default {
     mixins : [
         reactiveProp
     ],
-    props: ["chartData", "options"],
+    props: 
+    ["chartData", "options"],
     mounted() {
-        this.renderChart(this.chartData,{
+        this.renderChart(this.chartData, this.options, {
             borderWidth: "10px",
             hoverBackgroundColor: "red",
             hoverBorderWidth: "10px"
