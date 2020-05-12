@@ -8,71 +8,107 @@
 
         <div class="card m-2 p-2">
             <h2 class="card-title">Add New Expenses</h2>
+            <form @submit.prevent='submit'>
 
-            <!-- Form starts here -->
-            <!-- Name -->
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="name">Transaction Name: </label>
-                <div class="col-sm-10">
-            
-                    <input id="name" class="form-control" v-model.trim="newTransactionName">
-                </div>
-            </div>
-
-            <!-- Date -->
-            <div class="form-group row">
+                <!-- Form starts here -->
+                <!-- Name -->
+                <div class="form-group row" >
+                    <label class="col-sm-2 col-form-label" for="name">Transaction Name: </label>
+                    <div class="col-sm-10">
                 
-                <label class="col-sm-2 col-form-label" for="when">Date of Transaction: </label>
-
-                <div class="col-sm-10">
-                    <input id="when" class="form-control" type="date" v-model.lazy="when" >
-                </div>
-            </div>
-
-            <!-- Category -->
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="category">Category: </label>
-
-                <div class="col-sm-10">
-                    <select class="form-control" v-model="category">
-                        <option disabled value="">Please select one</option>
-                        <option v-for="category in categories" v-bind:key="category" v-bind:value="category" >{{category}}</option> 
-                    </select>
-                </div>
-            </div>
-
-            <!-- Method -->
-            <div class="form-group row">
-                <label for="category" class="col-sm-2 col-form-label">Method: </label>
-
-                <div class="col-sm-10">
-                    <select class="form-control" v-model="method">
-                        <option disabled value="">Please select one</option>
-                        <option v-for="method in methods" v-bind:key="method" v-bind:value="method" >{{method}}</option> 
-                    </select>
-                </div>
-            </div>
-
-            <!-- Value -->
-            <div class="form-group row">
-                <label for="value" class="col-sm-2 col-form-label">Amount: </label>
-
-                <div class="col-sm-10 input-group">
-
-                    <input 
-                    type="text" 
-                    id="value" 
-                    class="form-control" 
-                    v-model="validateAmount" 
-                    @blur="isInputActive = false" 
-                    @focus="isInputActive = true">
+                        <input id="name" class="form-control"  type="text" data-parsley-minlength="4" v-model.trim="$v.newTransactionName.$model" :class="{'is-invalid':$v.newTransactionName.$error, 'is-valid':!$v.newTransactionName.$invalid}" >
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">
+                            <span v-if="!$v.newTransactionName.required">Transaction Name is required.</span>
+                            <span v-if="!$v.newTransactionName.minLength">Transaction Name must have at least {{$v.newTransactionName.$params.minLength.min}} letter.</span>
+                        </div>
+                    </div>
                 
+                    
                 </div>
-                
-            </div>
 
-            <!-- ! This is the button section -->
-            <button class="btn btn-primary" v-on:click="addExpense">Add</button>
+                <!-- Date -->
+                <div class="form-group row">
+                    
+                    <label class="col-sm-2 col-form-label" for="when">Date of Transaction: </label>
+
+                    <div class="col-sm-10">
+                        <input id="when" class="form-control" type="date" v-model.lazy="$v.when.$model" :class="{'is-invalid':$v.when.$error, 'is-valid':!$v.when.$invalid}"  >
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">
+                            <span v-if="!$v.when.required">Transaction Date is required.</span>
+                            <span v-if="!$v.when.minValue">Transaction Date must not be further than {{today }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value -->
+                <div class="form-group row">
+                    <label for="value" class="col-sm-2 col-form-label">Amount: </label>
+
+                    <div class="col-sm-10 input-group">
+
+                        <input 
+                        type="text" 
+                        id="value" 
+                        class="form-control" 
+                        v-model.lazy="$v.validateAmount.$model" 
+                        @blur="isInputActive = false" 
+                        @focus="isInputActive = true"
+                        :class="{'is-invalid':$v.validateAmount.$error, 'is-valid':!$v.validateAmount.$invalid}" >
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">
+                            <span v-if="!$v.validateAmount.required">Transaction Value is required.</span>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+                <div class="alert alert-danger" v-show="flags.length > 0 ">
+                    <li v-for="flag in flags" v-bind:key="flag">{{flag}}</li>
+                </div>  
+
+                <!-- Category -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="category">Category: </label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control" v-model="$v.category.$model"  :class="{'is-invalid':$v.category.$error, 'is-valid':!$v.category.$invalid}">
+                            <option disabled value="">Please select one</option>
+                            <option v-for="category in categories" v-bind:key="category" v-bind:value="category" >{{category}}</option> 
+                        </select>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">
+                            <span v-if="!$v.category.required">Transaction Category is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Method -->
+                <div class="form-group row">
+                    <label for="method" class="col-sm-2 col-form-label">Method: </label>
+
+                    <div class="col-sm-10">
+                        
+                        <select class="form-control" v-model="$v.method.$model"  :class="{'is-invalid':$v.method.$error, 'is-valid':!$v.method.$invalid}">
+                            <option disabled value="">Please select one</option>
+                            <option v-for="method in methods" v-bind:key="method" v-bind:value="method" >{{method}}</option> 
+                        </select>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">
+                            <span v-if="!$v.method.required">Transaction Method is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <!-- ! This is the button section -->
+                <button class="btn btn-primary" v-on:click="addExpense" :disabled="submitStatus === 'PENDING'">Add</button>
+                <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+            </form>
 
         </div>
     </div>
@@ -83,6 +119,12 @@
 </template>
 
 <script>
+
+import { required, minLength, minValue, requiredIf } from "vuelidate/lib/validators"
+
+
+
+
 export default {
     name: 'NewExpenseForm',
     mounted() {
@@ -102,7 +144,9 @@ export default {
             method: '',
             isInputActive: false,
             errors: [],
-
+            flags: [],
+            today: new Date(),
+            
 
         }
     },
@@ -145,17 +189,29 @@ export default {
             }
 
         },
-        isNumeric: function (n) {
-            return !isNaN(parseFloat(n)) && isFinite(n);
+        submit() {
+            console.log('submit!')
+            this.$v.$touch()
+            if(this.$v.$invalid){
+                this.submitStatus="ERROR"
+            }else {
+                setTimeout( () => {
+                    this.submitStatus ='OK'
+                }, 500)
+                this.addExpense()
+            }
         },
+        
+        
 
     },
     computed: {
         validateAmount: {
             get: function() {
+
                 if(this.isInputActive){
+
                     // Cursor is inside the input field. unformat display value for user
-                    
                     return this.value.toString()
                 } else {
                     // User is not modifying now. Format display value for user interface
@@ -163,17 +219,57 @@ export default {
                 }
             },
             set: function(modifiedValue){
+                this.flags = []
+
                 // Recalculate value after ignoring "$" and "," in user input
                 let newValue = parseFloat(modifiedValue.replace(/[^\d\.]/g, ""))
+                let flagMsg = ''
                  // Ensure that it is not NaN
                 if (isNaN(newValue)) {
-                newValue = 0
+                    flagMsg = 'Please enter numeric value only'
+                    newValue = ''
+                    this.flags.push(flagMsg)
+
+                    
+                }
+                else if (newValue <= 0){
+                    flagMsg = 'Amount must be more than 0'
+                    newValue = ''
+                    this.flags.push(flagMsg)
+
                 }
                 this.value = newValue
-                
+
             }
 
+        },
+        
+
+    },
+    validations: {
+        newTransactionName:{
+            required,
+            minLength: minLength(4)
+
+        },
+        
+        category: {
+            required,      
+        },
+        validateAmount:{
+
+        },
+        when:{
+            required,
+            minValue: when => when < new Date().toISOString
+
+        },
+        method: {
+            required
         }
+
+            
+
 
     }
 

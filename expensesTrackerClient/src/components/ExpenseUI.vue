@@ -11,6 +11,7 @@
 <script>
 import NewExpenseForm from './NewExpenseForm.vue'
 import ExpenseTable from './ExpenseTable.vue'
+import { required, minLength } from "vuelidate/lib/validators"
 
 export default {
     name: 'ExpenseUI',

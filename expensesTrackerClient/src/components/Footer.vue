@@ -12,7 +12,10 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb indigo lighten-4">
                         <li class="breadcrumb-item"><router-link to="/"><strong>Main Page</strong></router-link></li>
+                        <li class="breadcrumb-item"><router-link to="/Modify"><strong>Modify Expenses</strong></router-link></li>
+
                         <li class="breadcrumb-item"><router-link to="/Snapshot"><strong>Snapshot</strong></router-link></li>
+
                     </ol>
 
                 </nav>
@@ -64,7 +67,7 @@ export default {
 li{
     text-align: center;
     display: inline;
-    padding-left:420px;
+    
 
 }
 
