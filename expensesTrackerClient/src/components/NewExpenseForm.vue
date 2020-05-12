@@ -37,7 +37,7 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">
                             <span v-if="!$v.when.required">Transaction Date is required.</span>
-                            <span v-if="!$v.when.minValue">Transaction Date must not be further than {{today }}</span>
+                            <span v-if="!$v.when.maxValue">Transaction Date must not be further than {{today }}</span>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 
 <script>
 
-import { required, minLength, minValue, requiredIf } from "vuelidate/lib/validators"
+import { required, minLength, maxValue, requiredIf } from "vuelidate/lib/validators"
 
 
 
@@ -261,7 +261,7 @@ export default {
         },
         when:{
             required,
-            minValue: when => when < new Date().toISOString
+            maxValue: maxValue(new Date().toISOString) //when => when < new Date().toISOString
 
         },
         method: {
