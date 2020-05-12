@@ -40,7 +40,7 @@
     </body>
 
 
-    <PieChart  v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
+    <PieChart class="chartSpace" v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
 
 </div>
 
@@ -97,7 +97,7 @@ export default {
                     }
                 }
             },
-            responsive: true,
+            responsive: false,
             legend: {
                 position:'bottom'
             }
@@ -261,6 +261,9 @@ export default {
 }
 .container{
     text-align: center;
+}
+.chartSpace{
+    position: center;
 }
 
 </style>
