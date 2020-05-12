@@ -39,9 +39,10 @@
         </div>
     </body>
 
+    <div v-if="loading == true">
 
-    <PieChart class="chartSpace" v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
-
+        <PieChart class="chartSpace" v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
+    </div>
 </div>
 
 
@@ -84,12 +85,14 @@ export default {
                 'November' : '11',
                 'December' : '12'
             },
+            loading: false,
             
         }
     },
     mounted(){
         this.options = {
             hoverBorderWidth: 20,
+            
             tooltips: {
                 callbacks: {
                     label: function(tooltipItem, data) {
@@ -99,8 +102,10 @@ export default {
             },
             responsive: false,
             legend: {
+                display: true,
                 position:'bottom'
             }
+            
 
             
         }
@@ -110,8 +115,8 @@ export default {
     },
     methods: {
         getDate() {
-            // TODO Need to figure out how to refresh the year options when new expenses added
-            this.$ExpenseService.getAllExpenses().then( expenses => {
+            this.$ExpenseService.getAllExpenses()
+            .then( expenses => {
                 this.expenses = expenses
 
                 let yearList = [];
@@ -133,6 +138,7 @@ export default {
                 this.years = yearList
                 this.dateData = allDates
             })
+            .catch( err => console.error(err))
         },
         getMonth(monthList){
             for( let i in this.monthObject){
@@ -189,6 +195,7 @@ export default {
                     chartObj[el] = proportion
             }
             let colors = this.generateRandomColor(Object.keys(chartObj).length)
+            this.loading = true
 
             this.expensesChartData = {
                 hoverBackgroundColor: "red",
@@ -219,7 +226,9 @@ export default {
     watch: {
         year: function(year){
             let tmpList = []
-            this.months = []      
+            this.months = []
+            this.month= ''    
+            this.loading = false  
 
             this.dateData.forEach(function (el, index){          
                 if (el.split('-')[0] == year){
@@ -261,9 +270,6 @@ export default {
 }
 .container{
     text-align: center;
-}
-.chartSpace{
-    position: center;
 }
 
 </style>
