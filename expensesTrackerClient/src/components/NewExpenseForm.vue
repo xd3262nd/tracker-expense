@@ -172,7 +172,6 @@ export default {
             this.$v.$touch()
 
             this.errors = []
-            // TODO: Need to validate if the amount is numeric etc...
             if(this.newTransactionName && this.category && this.value && this.method && this.when){
                 
                 let expense = {
@@ -184,6 +183,7 @@ export default {
                 }
                 // emit message to parent with info about new expense.
                 this.$emit('new-expense', expense);
+                this.$v.$reset()
                 this.newTransactionName = ''
                 this.category = ''
                 this.when = ''
@@ -194,12 +194,7 @@ export default {
                 
             }
 
-        },
-        submit() {
-            console.log('submit!')
-            this.$v.$touch()
-            
-        },
+        }
         
         
 
@@ -207,18 +202,15 @@ export default {
     computed: {
         validateAmount: {
             get: function() {
-
                 if(this.isInputActive){
-
                     // Cursor is inside the input field. unformat display value for user
                     return this.value.toString()
                 } else {
                     // User is not modifying now. Format display value for user interface
-                    return (Math.round(this.value * 100) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+                    return (Math.round(this.value * 100) / 100).toFixed(2)
                 }
             },
             set: function(modifiedValue){
-
                 // Recalculate value after ignoring "$" and "," in user input
                 let newValue = parseFloat(modifiedValue.replace(/[^\d\.]/g, ""))
                  // Ensure that it is not NaN
@@ -238,6 +230,7 @@ export default {
 
     },
     validations: {
+        // Setting specific validation for each fields
         newTransactionName:{
             required,
             minLength: minLength(4)
