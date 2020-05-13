@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@vuejs-community/vue-filter-date-parse": "^1.1.4",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.13.1",
+    "chart.js": "^2.9.3",
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-router": "^3.1.6",
+    "vuelidate": "0.7.5",
+    "vuelidate-error-extractor": "2.2.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
