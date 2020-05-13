@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     let Expense = sequelize.define('Expense', {
-    //    TODO: how to set the id as unique value to search from?
 
         name: {
             type: DataTypes.STRING,
@@ -23,9 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         date: {
             type: DataTypes.DATEONLY,
-            // get: function() {
-            //     return moment(this.getDataValue('date')).format('DD/MM/YYYY')
-            // }
+            
         }
 
     })

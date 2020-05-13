@@ -20,6 +20,11 @@
                 </nav>
 
             </div>
+            <p class="text-right credit p-2">Header image by 
+                <a href="https://unsplash.com/photos/aGwT9nSiTWU">@kharp via Unsplash</a>
+                
+            </p>
+
 
             
 

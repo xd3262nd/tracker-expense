@@ -262,9 +262,15 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
+
 .input-group-addon{
     font-size:24px;
     
+}
+
+h2{
+    font-family: 'Inconsolata', monospace;
 }
 
 </style>

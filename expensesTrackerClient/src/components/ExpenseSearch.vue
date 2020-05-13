@@ -9,7 +9,7 @@
                 
             </div>
         </div>
-
+        <!-- Search Form Starts here -->
         <div class="searchForm">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="year">Year: </label>
@@ -39,8 +39,8 @@
         </div>
     </body>
 
-    <div v-if="loading == true">
-
+    <div>
+        <!-- Chart will be presented here -->
         <PieChart class="chartSpace" v-if="dataLoaded" v-bind:chartData="expensesChartData" v-bind:options="options"></PieChart>
     </div>
 </div>
@@ -85,7 +85,6 @@ export default {
                 'November' : '11',
                 'December' : '12'
             },
-            loading: false,
             
         }
     },
@@ -195,7 +194,6 @@ export default {
                     chartObj[el] = proportion
             }
             let colors = this.generateRandomColor(Object.keys(chartObj).length)
-            this.loading = true
 
             this.expensesChartData = {
                 hoverBackgroundColor: "red",
@@ -211,10 +209,6 @@ export default {
                 ]
             }
             
-
-
-
-            console.log(this.expensesChartData)
             this.dataLoaded = true
 
 
@@ -228,7 +222,7 @@ export default {
             let tmpList = []
             this.months = []
             this.month= ''    
-            this.loading = false  
+            this.dataLoaded = false
 
             this.dateData.forEach(function (el, index){          
                 if (el.split('-')[0] == year){

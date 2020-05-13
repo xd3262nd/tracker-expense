@@ -22,23 +22,27 @@ export default {
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Changa+One&family=Raleway&display=swap');
 .jumbotron {
-    background-image: url('../assets/header-image.jpg');
+    background-image: url('../assets/header-image.png');
     background-position: center;
     background-size: cover;
-    opacity: 0.7;
+    opacity:0.9;
 }
 
-
+p{
+font-family: 'Raleway', sans-serif;
+}
 
 #title {
 font-weight: 500;
 color: rgb(173, 155, 155);
+font-family: 'Changa One', cursive;
 }
 
 div.container, h1, p{
     margin: 20px;
-    opacity: 10.2;
     text-align: left;
     font-weight: bolder;
 }

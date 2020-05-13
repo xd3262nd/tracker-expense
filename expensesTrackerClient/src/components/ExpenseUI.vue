@@ -30,17 +30,24 @@ export default {
   },
   methods: {
     newExpenseAdded(expense) {
-      this.$ExpenseService.addExpense(expense).then( expense => {
+        // API call to add expenses
+      this.$ExpenseService.addExpense(expense)
+      .then( expense => {
+
         this.updateExpense()
-      }).catch( err => {
+
+      })
+      .catch( err => {
         let msg = err.response.data.join(', ')
         alert('Error adding new expense.\n' + msg)
       })
     },
     updateExpense() {
-      this.$ExpenseService.getAllExpenses().then( expenses => {
-        this.expenses = expenses
-      })
+        // API call to reload all the expenses data
+        this.$ExpenseService.getAllExpenses().then( expenses => {
+
+            this.expenses = expenses
+        })
     },
     deleteExpense(expense){
         this.$ExpenseService.deleteExpense(expense.id).then( () => {
