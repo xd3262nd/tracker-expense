@@ -25,4 +25,9 @@ export default {
 
 <style scoped>
 
+
+canvas{
+    margin: 0 auto;
+    }
+
 </style>

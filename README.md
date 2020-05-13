@@ -10,13 +10,23 @@ For demonstration purposes this web application uses SQLite database with some r
 ***
 ## Preview
 
+### HomePage
+
+<img src="/assets//mainPage.png" alt="Expenses HomePage" width="100%" />
+
+### Expense Snapshot
+
+<img src="/assets/chartGraph.png" alt="Expenses Snapshot" width="100%" />
+
+***
+
 
 ## Installation
 
 ### Backend
-- Run `nodemon` on the CLI
+- Run `nodemon` on the CLI to have the server running
 
-The backend application runs on port `3000`.
+The backend server runs on port `3000`.
 
 Example endpoint: `http://localhost:3000/api/expenses`
 
@@ -35,6 +45,7 @@ _For more information, visit [README](expensesTrackerClient/README.md) on the `c
 ### Front end
 - [Application](https://vuejs.org/)
 - [Charts](https://www.chartjs.org/)
+- [Vuelidate](https://vuelidate.js.org/)
 
 ### Backend
 - [Sequelize](https://sequelize.org/)
